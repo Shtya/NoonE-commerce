@@ -20,7 +20,9 @@ exports.CreateOrder = AsyncHandler(async(req , res , next)=>{
         user : req.user._id ,
         cartItems : cart.cartItems ,
         shippingAddress : req.body.shippingAddress ,
-        totalOrderPrice : orderPrice
+        totalOrderPrice : orderPrice,
+        paidAt:Date.now(),
+        paymentmethodType : "card"
     })
 
     if(order){
@@ -38,13 +40,11 @@ exports.CreateOrder = AsyncHandler(async(req , res , next)=>{
         await M_cart.findByIdAndDelete(req.params.cartId)
 
     }
-
-    res.status(200).json({data : order})
 })
 
 exports.GetAllOrder = AsyncHandler(async(req , res , next)=>{
     const order = await M_order.find()
-    res.status(200).json({data : order})
+    res.status(200).json({result :order.length , data : order})
 })
 
 exports.GetIdOrder = AsyncHandler(async(req , res , next)=>{
