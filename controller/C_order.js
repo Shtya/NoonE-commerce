@@ -141,7 +141,7 @@ exports.Session = AsyncHandler(async(req , res , next)=>{
     const sig = req.headers['stripe-signature'];
     let event;
     try {
-      event = stripe.webhooks.constructEvent(req.body, sig, process.env.Strip_webhook_secreat);// EndPoint Secret Key
+      event = stripe.webhooks.constructEvent(req.body, sig, "whsec_g4DuFQVenm7yCqjHMuAMWOkAIwpCENTu");// EndPoint Secret Key
     } catch (err) {
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
