@@ -9,6 +9,7 @@ const morgan = require("morgan")
 const {Dbconnection} = require("./config/Dbconnection")
 const ApiError = require("./utils/ApiError")
 const { mountenRoutes } = require("./routes")
+const { webhookCheckout } = require("./controller/C_order")
 Dbconnection()
 
 
@@ -23,7 +24,7 @@ app.options("*" , cors())
 app.use(compression())
 mountenRoutes(app)
 
-
+app.use("/webhook-checkout" , express.raw({type:"application/json"} , webhookCheckout))
 
 
 
