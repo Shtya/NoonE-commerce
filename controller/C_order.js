@@ -84,7 +84,7 @@ exports.Session = AsyncHandler(async(req , res , next)=>{
     
     // 2) Get order price depend on cart price "check if coupon apply"
         const orderPrice = cart.totalPriceAfterDiscount ? cart.totalPriceAfterDiscount : cart.totalCartPrice
-        
+
     // 3) Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
         line_items: [{

@@ -10,6 +10,7 @@ const EditeTotalPrice = (cart)=>{
     cart.totalCartPrice = totalprice
     return totalprice
 }
+
 exports.AddCart = AsyncHandler(async(req , res)=>{
 
     const {productId , color } = req.body
@@ -41,7 +42,9 @@ exports.AddCart = AsyncHandler(async(req , res)=>{
         }
 
         // calculate total cart priceAfter
-       EditeTotalPrice(cart)
+        let totalprice = 0;
+        cart.cartItems.map(e=> totalprice += e.quantity * e.price)
+        cart.totalCartPrice = totalprice
     }
 
     res.json({data : cart})
